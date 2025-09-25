@@ -5,10 +5,12 @@ import productRouter from './routes/productRouter.js';
 import userRouter from './routes/userRouter.js';
 import jwt from 'jsonwebtoken';
 import orderRouter from './routes/orderRouter.js';
+import cors from 'cors';
 
 let app = express();
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use((req,res,next)=>{
     const tokenString = req.header("Authorization")
@@ -46,9 +48,9 @@ mongoose.connect("mongodb+srv://admin:123@cluster0.u9abn8d.mongodb.net/?retryWri
 
 
 
-app.use("/products", productRouter)
-app.use("/users", userRouter)
-app.use("/orders", orderRouter)
+app.use("/api/products", productRouter)
+app.use("/api/users", userRouter)
+app.use("/api/orders", orderRouter)
 
 app.listen(5000, 
     ()=> {
